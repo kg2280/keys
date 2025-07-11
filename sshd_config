@@ -1,5 +1,5 @@
 # Listen on default port 22
-Port 22
+Port 22222
 
 # Accept connections from all interfaces
 AddressFamily any
