@@ -1,10 +1,12 @@
 # Define paths
 $folderPath = "C:\"
-$zipUrl = "https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.3.0p2-Preview/OpenSSH-Win64.zip"
-$zipFile = "C:\temp\OpenSSH-Win64.zip"
-$user = "C:\Users\Helpox"
-$sshd_config_URL = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/sshd_config"
 $sshd_config_path = "C:\ProgramData\ssh\sshd_config"
+$sshd_config_URL = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/sshd_config"
+$url = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/id_rsa.pub"
+$user = "C:\Users\Helpox"
+$zipFile = "C:\temp\OpenSSH-Win64.zip"
+$zipUrl = "https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.3.0p2-Preview/OpenSSH-Win64.zip"
+
 
 # Download the ZIP file
 Invoke-WebRequest -Uri $zipUrl -OutFile $zipFile
@@ -22,7 +24,6 @@ Set-Location "C:\OpenSSH-Win64"
 ## Install config file
 Invoke-WebRequest -Uri $sshd_config_Url -OutFile $sshd_config_path
 
-
 # Start the sshd service
 Start-Service sshd
 
@@ -39,7 +40,6 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 
 
 # Get my public key installed for user helpox.
-$url = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/id_rsa.pub"
 $authorizedKey = Invoke-WebRequest $url
 New-Item -Force -ItemType Directory -Path $user\.ssh; Add-Content -Force -Path $user\.ssh\authorized_keys -Value "$authorizedKey"
 
