@@ -9,6 +9,10 @@ $zipFile = "C:\temp\OpenSSH-Win64.zip"
 $zipUrl = "https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.3.0p2-Preview/OpenSSH-Win64.zip"
 
 
+if (-not (Test-Path -Path "C:\Temp" -PathType Container)) {
+    New-Item -Path "C:\Temp" -ItemType Directory | Out-Null
+}
+
 # Download the ZIP file
 Invoke-WebRequest -Uri $zipUrl -OutFile $zipFile
 
