@@ -45,6 +45,6 @@ $authorizedKey = Invoke-WebRequest $url
 New-Item -Force -ItemType Directory -Path $user\.ssh; Add-Content -Force -Path $user\.ssh\authorized_keys -Value "$authorizedKey"
 
 # Repair permission
-.\FixHostFilePermissions.ps1
-.\FixUserFilePermissions.ps1
+.\FixHostFilePermissions.ps1 -Confirm
+.\FixUserFilePermissions.ps1 -Confirm
 
