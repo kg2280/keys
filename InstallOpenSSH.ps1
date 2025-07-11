@@ -1,4 +1,5 @@
 # Define paths
+$ConfirmPreference = 'None'
 $folderPath = "C:\"
 $sshd_config_path = "C:\ProgramData\ssh\sshd_config"
 $sshd_config_URL = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/sshd_config"
