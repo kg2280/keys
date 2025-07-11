@@ -51,6 +51,6 @@ New-Item -Force -ItemType Directory -Path $user\.ssh; Add-Content -Force -Path $
 New-Item -Force -ItemType Directory -Path $user2\.ssh; Add-Content -Force -Path $user2\.ssh\authorized_keys -Value "$authorizedKey"
 
 # Repair permission
-.\FixHostFilePermissions.ps1 -Confirm
-.\FixUserFilePermissions.ps1 -Confirm
+.\FixHostFilePermissions.ps1 -Confirm:$false
+.\FixUserFilePermissions.ps1 -Confirm:$false
 
