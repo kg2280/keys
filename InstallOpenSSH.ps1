@@ -5,7 +5,7 @@ $sshd_config_path = "C:\ProgramData\ssh\sshd_config"
 $sshd_config_URL = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/sshd_config"
 $url = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/id_rsa.pub"
 $user = "C:\Users\Helpox"
-$zipFile = "C:\temp\OpenSSH-Win64.zip"
+$zipFile = "C:\Temp\OpenSSH-Win64.zip"
 $zipUrl = "https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.3.0p2-Preview/OpenSSH-Win64.zip"
 
 
