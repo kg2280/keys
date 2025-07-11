@@ -3,6 +3,8 @@ $folderPath = "C:\"
 $zipUrl = "https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.3.0p2-Preview/OpenSSH-Win64.zip"
 $zipFile = "C:\temp\OpenSSH-Win64.zip"
 $user = "C:\Users\Helpox"
+$sshd_config_URL = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/sshd_config"
+$sshd_config_path = "C:\ProgramData\ssh\sshd_config"
 
 # Download the ZIP file
 Invoke-WebRequest -Uri $zipUrl -OutFile $zipFile
@@ -16,6 +18,10 @@ Remove-Item $zipFile
 # Run install script
 Set-Location "C:\OpenSSH-Win64"
 .\install-sshd.ps1
+
+## Install config file
+Invoke-WebRequest -Uri $sshd_config_Url -OutFile $sshd_config_path
+
 
 # Start the sshd service
 Start-Service sshd
