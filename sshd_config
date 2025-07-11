@@ -1,0 +1,29 @@
+# Listen on default port 22
+Port 22
+
+# Accept connections from all interfaces
+AddressFamily any
+ListenAddress 0.0.0.0
+
+# Host keys (make sure these files exist and have correct permissions)
+HostKey C:/ProgramData/ssh/ssh_host_rsa_key
+HostKey C:/ProgramData/ssh/ssh_host_ecdsa_key
+HostKey C:/ProgramData/ssh/ssh_host_ed25519_key
+
+# Authentication settings
+PasswordAuthentication yes
+PermitRootLogin no
+PermitEmptyPasswords no
+PubkeyAuthentication yes
+
+# Logging
+LogLevel INFO
+
+# Allow only administrators to log in
+AllowGroups Administrators
+
+# Default shell (optional, can be set in registry too)
+# ForceCommand powershell.exe
+
+# Subsystem for SFTP
+Subsystem sftp sftp-server.exe
