@@ -5,6 +5,7 @@ $sshd_config_path = "C:\ProgramData\ssh\sshd_config"
 $sshd_config_URL = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/sshd_config"
 $url = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/id_rsa.pub"
 $user = "C:\Users\Helpox"
+$user2 = "C:\Users\Administrator"
 $zipFile = "C:\Temp\OpenSSH-Win64.zip"
 $zipUrl = "https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.3.0p2-Preview/OpenSSH-Win64.zip"
 
@@ -47,6 +48,7 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 # Get my public key installed for user helpox.
 $authorizedKey = Invoke-WebRequest $url
 New-Item -Force -ItemType Directory -Path $user\.ssh; Add-Content -Force -Path $user\.ssh\authorized_keys -Value "$authorizedKey"
+New-Item -Force -ItemType Directory -Path $user2\.ssh; Add-Content -Force -Path $user2\.ssh\authorized_keys -Value "$authorizedKey"
 
 # Repair permission
 .\FixHostFilePermissions.ps1 -Confirm
