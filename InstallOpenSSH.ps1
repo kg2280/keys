@@ -27,9 +27,6 @@ Remove-Item $zipFile
 Set-Location "C:\OpenSSH-Win64"
 .\install-sshd.ps1
 
-## Install config file
-Invoke-WebRequest -Uri $sshd_config_Url -OutFile $sshd_config_path
-
 # Start the sshd service
 Start-Service sshd
 
@@ -49,6 +46,10 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 $authorizedKey = Invoke-WebRequest $url -UseBasicParsing
 New-Item -Force -ItemType Directory -Path $user\.ssh; Add-Content -Force -Path $user\.ssh\authorized_keys -Value "$authorizedKey"
 New-Item -Force -ItemType Directory -Path $user2\.ssh; Add-Content -Force -Path $user2\.ssh\authorized_keys -Value "$authorizedKey"
+
+## Install config file
+Invoke-WebRequest -Uri $sshd_config_Url -OutFile $sshd_config_path
+Restart-Service sshd
 
 # Repair permission
 .\FixHostFilePermissions.ps1 -Confirm:$false
