@@ -46,7 +46,7 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 
 
 # Get my public key installed for user helpox.
-$authorizedKey = Invoke-WebRequest $url
+$authorizedKey = Invoke-WebRequest $url -UseBasicParsing
 New-Item -Force -ItemType Directory -Path $user\.ssh; Add-Content -Force -Path $user\.ssh\authorized_keys -Value "$authorizedKey"
 New-Item -Force -ItemType Directory -Path $user2\.ssh; Add-Content -Force -Path $user2\.ssh\authorized_keys -Value "$authorizedKey"
 
