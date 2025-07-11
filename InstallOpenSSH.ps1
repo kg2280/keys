@@ -1,10 +1,14 @@
+param(
+	[string]$Name
+)
+
 # Define paths
 $ConfirmPreference = 'None'
 $folderPath = "C:\"
 $sshd_config_path = "C:\ProgramData\ssh\sshd_config"
 $sshd_config_URL = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/sshd_config"
 $url = "https://raw.githubusercontent.com/kg2280/keys/refs/heads/master/id_rsa.pub"
-$user = "C:\Users\Helpox"
+$user = "C:\Users\$Name"
 $user2 = "C:\Users\Administrator"
 $zipFile = "C:\Temp\OpenSSH-Win64.zip"
 $zipUrl = "https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.3.0p2-Preview/OpenSSH-Win64.zip"
@@ -27,6 +31,9 @@ Remove-Item $zipFile
 Set-Location "C:\OpenSSH-Win64"
 .\install-sshd.ps1
 
+## Install config file
+Invoke-WebRequest -Uri $sshd_config_Url -OutFile $sshd_config_path
+
 # Start the sshd service
 Start-Service sshd
 
@@ -47,11 +54,7 @@ $authorizedKey = Invoke-WebRequest $url -UseBasicParsing
 New-Item -Force -ItemType Directory -Path $user\.ssh; Add-Content -Force -Path $user\.ssh\authorized_keys -Value "$authorizedKey"
 New-Item -Force -ItemType Directory -Path $user2\.ssh; Add-Content -Force -Path $user2\.ssh\authorized_keys -Value "$authorizedKey"
 
-## Install config file
-Invoke-WebRequest -Uri $sshd_config_Url -OutFile $sshd_config_path
-Restart-Service sshd
-
 # Repair permission
-.\FixHostFilePermissions.ps1 -Confirm:$false
-.\FixUserFilePermissions.ps1 -Confirm:$false
+.\FixHostFilePermissions.ps1 -Confirm
+.\FixUserFilePermissions.ps1 -Confirm
 
